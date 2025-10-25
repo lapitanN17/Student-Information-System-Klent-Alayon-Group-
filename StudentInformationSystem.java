@@ -92,8 +92,7 @@ public class Main {
             System.out.println("\nInvalid Student Number! Try Again\n");
         }
     }
-    
-    
+
     //Main Interface
     public static void mainInterface(BufferedReader br, String[] accounts, String[] studentNumber, String[] studentName, String[] studentGrades, String[] studentBalance, String[] subjects, String[] timeSchedule, String[] daySchedule, int existingAccounts, String loggedIn) {
         while (true) {
