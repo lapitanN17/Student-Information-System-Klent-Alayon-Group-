@@ -198,7 +198,8 @@ public class StudentInformationSystem {
                   break;
                   
                 case "EVALUATION":
-                    while (true ) {
+                    boolean finishedEvaluating = false;
+                    while (!finishedEvaluating) {
                         System.out.print("\nHow would you rate Kyle Dominic Pacatang's teaching method?\n");
                         System.out.print("1 - MEH\n");
                         System.out.print("2 - OK\n");
@@ -209,7 +210,7 @@ public class StudentInformationSystem {
                         String rating = null;
                         try {
                             rating = br.readLine();
-                            if (rating.trim().isEmpty()) break;
+                            if (rating == null || rating.trim().isEmpty()) break;
                         } catch (IOException e) {
                             System.out.println("Error");
                             continue;
@@ -217,11 +218,22 @@ public class StudentInformationSystem {
                         
                         if (!rating.trim().equals("1") && !rating.trim().equals("2") && !rating.trim().equals("3") && !rating.trim().equals("4") && !rating.trim().equals("5")) {
                             System.out.println("Invalid Input!\n");
-                            continue;
                         } else {
-                            System.out.println("\nThank You for Evaluating!\n");
+                            while (true) {
+                                try {
+                                   System.out.print("\nThank You for Evaluating!\n(Press Enter to Return)\nInput: ");
+                                   String input = br.readLine();
+                                    if (input == null || input.trim().isEmpty()) {
+                                        finishedEvaluating = true;
+                                        break;
+                                    } else {
+                                        System.out.println("Invalid Input! Try Again");
+                                    }
+                                } catch (IOException e ) {
+                                    System.out.println("Error");
+                                }
+                            }
                         }
-                      break;
                     }
                   break;
                 default:
