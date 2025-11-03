@@ -85,7 +85,12 @@ public class StudentInformationSystem {
                 String checkStudentName = accountPart[1];
                 
                 if (enterStudentNumber.equals(checkStudentNumber)) {
-                    System.out.println("\nHELLO " + checkStudentName);
+                    try {
+                        System.out.println("\nLogging In\nPlease Wait...");
+                        Thread.sleep(3000);
+                        System.out.println("\nHELLO " + checkStudentName);
+                    } catch (InterruptedException e) {
+                    }
                     return enterStudentNumber;
                 }
             }
@@ -103,9 +108,23 @@ public class StudentInformationSystem {
             
             try {
                 enterInput = br.readLine();
-                if (enterInput.trim().isEmpty()) {
-                    System.out.println("\nReturning to Login Page...");
-                    return;
+                if (enterInput == null || enterInput.trim().isEmpty()) {
+                    while (true) {
+                        System.out.println("ARE YOU SURE YOU WANT TO LOGOUT?\nType 'YES' to logout");
+                        String enterInput2 = br.readLine();
+                        if (enterInput2 == null || enterInput2.trim().isEmpty()) break;
+                        
+                        if (enterInput2.toUpperCase().trim().equals("YES")) {
+                            try {
+                                System.out.println("\nLogging Out\nPlease Wait...");
+                                Thread.sleep(2000);
+                                System.out.println("\nLOGGED OUT");
+                            } catch (InterruptedException e) {
+                            }
+                            System.out.println("\nReturning to Login Page...");
+                            return;
+                        }
+                    }
                 }
             } catch (IOException e) {
                 System.out.println("Error");
@@ -139,11 +158,9 @@ public class StudentInformationSystem {
                                 break;
                             } else {
                                 System.out.println("Invalid Input! Try Again");
-                                continue;
                             }
                         } catch (IOException e) {
                             System.out.println("Error");
-                            continue;
                        }
                     }
                   break;
@@ -168,11 +185,10 @@ public class StudentInformationSystem {
                                 break;
                             } else {
                                 System.out.println("Invalid Input! Try Again");
-                                continue;
+                                //continue;
                             }
                         } catch (IOException e) {
                             System.out.println("Error");
-                            continue;
                         }
                     }
                   break;
@@ -192,7 +208,6 @@ public class StudentInformationSystem {
                             else System.out.println("Invalid Input! Try Again");
                         } catch (IOException e) {
                             System.out.println("Error");
-                            continue;
                         }
                     }
                   break;
@@ -236,8 +251,6 @@ public class StudentInformationSystem {
                         }
                     }
                   break;
-                default:
-                    System.out.println("Invalid Input! Try Again");
             }
         }
     }
