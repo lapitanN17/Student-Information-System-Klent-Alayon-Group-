@@ -18,7 +18,6 @@ public class StudentInformationSystem {
         
         boolean exit = false;
         while (!exit) {
-            //Goodluck sa finals ninyo especially kang JE Abaya *^v^* hahaha
             try {
                 for (int i = 0; i < studentNumber.length; i++) {
                     //"69420,Klent Alayon,11490"
@@ -107,6 +106,7 @@ public class StudentInformationSystem {
         }
     }
     
+    //Goodluck sa finals ninyo especially kang JE Abaya *^v^* hahaha
     
     //Main Interface
     public static void mainInterface(BufferedReader br, String[] accounts, String[] studentNumber, String[] studentName, String[] studentGrades, String[] studentBalance, String[] subjects, String[] timeSchedule, String[] daySchedule, int existingAccounts, String loggedIn, String[] toEvaluate) {
