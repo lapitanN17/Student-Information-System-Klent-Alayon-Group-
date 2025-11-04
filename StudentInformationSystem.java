@@ -13,9 +13,12 @@ public class StudentInformationSystem {
         String[] daySchedule = { "Monday & Tuesday", "Tuesday & Wednesday", "Wednesday & Thursday", "Thursday & Friday", "Friday" }; 
         String[] accounts = new String[studentNumber.length];
         
+        String[] toEvaluate = { "Kyle Dominic Pacatang,Mallo Aries", "Kyle Dominic Pacatang,Mallo Aries", "Kyle Dominic Pacatang,Mallo Aries", "Kyle Dominic Pacatang,Mallo Aries" };
         
-        boolean logout = false;
-        while (!logout) {
+        
+        boolean exit = false;
+        while (!exit) {
+            //Goodluck sa finals ninyo especially kang JE Abaya *^v^* hahaha
             try {
                 for (int i = 0; i < studentNumber.length; i++) {
                     //"69420,Klent Alayon,11490"
@@ -24,8 +27,8 @@ public class StudentInformationSystem {
                 int existingAccounts = accounts.length; //0123
                 
             
-                System.out.print("\n*-----STUDENT PORTAL-----*\n" +
-                "Enter 'LOGIN' to continue\n" + "(Press Enter to Exit)\n" + "-------------------------------------\n" + "Input: "
+                System.out.print("\n*===== ATCI =====\n-----STUDENT PORTAL-----*\n" +
+                "Type 'LOGIN' to continue\n" + "(Press Enter to Return)\n" + "-------------------------------------\n" + "Input: "
                 );
 
                 String selectedChoice = br.readLine();
@@ -34,7 +37,7 @@ public class StudentInformationSystem {
                    case "LOGIN":
                         String loggedIn = login(br, accounts, existingAccounts, studentNumber, studentName); //call function
                         if (loggedIn != null) {
-                            mainInterface(br, accounts, studentNumber, studentName, studentGrades, studentBalance, subjects, timeSchedule, daySchedule, existingAccounts, loggedIn);
+                            mainInterface(br, accounts, studentNumber, studentName, studentGrades, studentBalance, subjects, timeSchedule, daySchedule, existingAccounts, loggedIn, toEvaluate);
                         }
                       break;
                     case "":
@@ -46,13 +49,13 @@ public class StudentInformationSystem {
             
                 if (selectedChoice.trim().isEmpty()) {
                     while (true) {
-                        System.out.print("\n-----ARE YOU SURE YOU WANT TO EXIT?-----\nEnter 'YES' to exit\n(Press Enter to return)\nInput: ");
+                        System.out.print("\n-----ARE YOU SURE YOU WANT TO EXIT?-----\nType 'YES' to exit\n(Press Enter to Return)\nInput: ");
                     
                         String selectedChoice2 = br.readLine();
                         if (selectedChoice2 == null || selectedChoice2.trim().isEmpty()) break;
                        
                         if (selectedChoice2.toUpperCase().trim().equals("YES")) {
-                            logout = true;
+                            exit = true;
                         } else {
                             System.out.println("Invalid Input! Try again");
                             continue;
@@ -88,20 +91,25 @@ public class StudentInformationSystem {
                     try {
                         System.out.println("\nLogging In\nPlease Wait...");
                         Thread.sleep(3000);
-                        System.out.println("\nHELLO " + checkStudentName);
+                        System.out.println("\nHELLO " + checkStudentName + "!");
                     } catch (InterruptedException e) {
                     }
                     return enterStudentNumber;
                 }
             }
-
-            System.out.println("\nInvalid Student Number! Try Again\n");
+            
+            try {
+                System.out.println("\nLogging In\nPlease Wait...");
+                Thread.sleep(3000);
+                System.out.println("\nInvalid Student Number! Try Again\n");
+            } catch (InterruptedException e) {
+            }         
         }
     }
     
     
     //Main Interface
-    public static void mainInterface(BufferedReader br, String[] accounts, String[] studentNumber, String[] studentName, String[] studentGrades, String[] studentBalance, String[] subjects, String[] timeSchedule, String[] daySchedule, int existingAccounts, String loggedIn) {
+    public static void mainInterface(BufferedReader br, String[] accounts, String[] studentNumber, String[] studentName, String[] studentGrades, String[] studentBalance, String[] subjects, String[] timeSchedule, String[] daySchedule, int existingAccounts, String loggedIn, String[] toEvaluate) {
         while (true) {
             System.out.print("\n---SELECT MENU OPTIONS---\n" + "'GRADES'\n" + "'BALANCE'\n" + "'SCHEDULE'\n" + "'EVALUATION'\n" + "Input: " );
             String enterInput = null;
@@ -110,7 +118,7 @@ public class StudentInformationSystem {
                 enterInput = br.readLine();
                 if (enterInput == null || enterInput.trim().isEmpty()) {
                     while (true) {
-                        System.out.println("ARE YOU SURE YOU WANT TO LOGOUT?\nType 'YES' to logout");
+                        System.out.println("\nARE YOU SURE YOU WANT TO LOGOUT?\nType 'YES' to logout");
                         String enterInput2 = br.readLine();
                         if (enterInput2 == null || enterInput2.trim().isEmpty()) break;
                         
@@ -121,7 +129,6 @@ public class StudentInformationSystem {
                                 System.out.println("\nLOGGED OUT");
                             } catch (InterruptedException e) {
                             }
-                            System.out.println("\nReturning to Login Page...");
                             return;
                         }
                     }
@@ -137,7 +144,7 @@ public class StudentInformationSystem {
                         System.out.print("\n-----GRADES-----\n");
                          //0,1 2 3
                         for (int i = 0; i < existingAccounts; i++) {
-                            // accounts = "69420"    "Klent Alayon"   "balance"   
+                            //accounts = "69420"    "Klent Alayon"   "balance"   
                             String[] accountPart = accounts[i].split(",");
                             String checkStudentNumber = accountPart[0];
                         
@@ -163,7 +170,7 @@ public class StudentInformationSystem {
                             System.out.println("Error");
                        }
                     }
-                  break;
+                  continue;
                   
                 case "BALANCE":
                     while (true) {
@@ -185,17 +192,16 @@ public class StudentInformationSystem {
                                 break;
                             } else {
                                 System.out.println("Invalid Input! Try Again");
-                                //continue;
                             }
                         } catch (IOException e) {
                             System.out.println("Error");
                         }
                     }
-                  break;
+                  continue;
                   
                 case "SCHEDULE":
                     while (true) {
-                        System.out.print("\n-----SCHEDULE-----\n");
+                        System.out.print("\n-----YOUR SCHEDULE-----\n");
                     
                         for (int i = 0; i < subjects.length; i++) {
                             System.out.println(subjects[i] + "\nTime: " + timeSchedule[i] + "\nDay: " + daySchedule[i] + "\n");
@@ -210,47 +216,108 @@ public class StudentInformationSystem {
                             System.out.println("Error");
                         }
                     }
-                  break;
+                  continue;
                   
                 case "EVALUATION":
-                    boolean finishedEvaluating = false;
-                    while (!finishedEvaluating) {
-                        System.out.print("\nHow would you rate Kyle Dominic Pacatang's teaching method?\n");
-                        System.out.print("1 - MEH\n");
-                        System.out.print("2 - OK\n");
-                        System.out.print("3 - GOOD\n");
-                        System.out.print("4 - GREAT\n");
-                        System.out.print("5 - EXCELLENT\n" + "Input: ");
-                        
-                        String rating = null;
+                    while (true) {
                         try {
-                            rating = br.readLine();
-                            if (rating == null || rating.trim().isEmpty()) break;
-                        } catch (IOException e) {
-                            System.out.println("Error");
-                            continue;
-                        }
-                        
-                        if (!rating.trim().equals("1") && !rating.trim().equals("2") && !rating.trim().equals("3") && !rating.trim().equals("4") && !rating.trim().equals("5")) {
-                            System.out.println("Invalid Input!\n");
-                        } else {
-                            while (true) {
-                                try {
-                                   System.out.print("\nThank You for Evaluating!\n(Press Enter to Return)\nInput: ");
-                                   String input = br.readLine();
-                                    if (input == null || input.trim().isEmpty()) {
-                                        finishedEvaluating = true;
-                                        break;
-                                    } else {
-                                        System.out.println("Invalid Input! Try Again");
+                            System.out.println("\n-----EVALUATION-----\n\n===Professors to Evaluate===");
+                            
+                            for (int i = 0; i < studentNumber.length; i++){
+                                if (studentNumber[i].equals(loggedIn)) {
+                                    String[] professor = toEvaluate[i].split(",");
+                                    
+                                    for (int j = 0; j < professor.length; j++) {
+                                        System.out.println((j + 1) + ". " + professor[j]);
                                     }
-                                } catch (IOException e ) {
-                                    System.out.println("Error");
                                 }
                             }
+                                    
+                            System.out.print("\nSelect to Evaluate\n(Press Enter to Return)\nInput: ");
+                            String selection = br.readLine();
+                            if (selection == null || selection.trim().isEmpty()) break;
+
+                            int selectionInt = 0;
+                            try {
+                                selectionInt = Integer.parseInt(selection) - 1;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid Input!");
+                                continue;
+                            }
+                            
+                            String professorName = null;
+                            boolean isCompleted = false;
+                            for (int i = 0; i < studentNumber.length; i++){
+                                if (studentNumber[i].equals(loggedIn)) {
+                                    String[] professor = toEvaluate[i].split(",");
+                                    if (selectionInt < 0 || selectionInt >= professor.length) {
+                                        System.out.println("Invalid Selection!");
+                                        isCompleted = true;
+                                        continue;
+                                    }
+                                    professorName = professor[selectionInt];
+                                    
+                                    if (professor[selectionInt].contains("[Completed]")) {
+                                        System.out.println("\nYou already completed evaluating this Professor!");
+                                        isCompleted = true;
+                                    }
+                                }
+                            }
+                            if (isCompleted) continue;
+
+
+                            boolean finishedEvaluating = false;
+                            while (!finishedEvaluating) {
+                                System.out.print("\nHow would you rate " + professorName + "'s teaching method?\n");
+                                System.out.print("1 - MEH\n");
+                                System.out.print("2 - OK\n");
+                                System.out.print("3 - GOOD\n");
+                                System.out.print("4 - GREAT\n");
+                                System.out.print("5 - EXCELLENT\n" + "Input: ");
+
+                                String rating = null;
+                                try {
+                                    rating = br.readLine();
+                                    if (rating == null || rating.trim().isEmpty()) finishedEvaluating = true;
+                                } catch (IOException e) {
+                                    System.out.println("Error");
+                                    continue;
+                                }
+
+                                if (!rating.trim().equals("1") && !rating.trim().equals("2") && !rating.trim().equals("3") && !rating.trim().equals("4") && !rating.trim().equals("5")) {
+                                    if (rating.trim().equals("")) continue;
+                                    System.out.println("Invalid Input!\n");
+                                } else {
+                                    while (!finishedEvaluating) {
+                                        System.out.print("\nThank You for Evaluating!\n(Press Enter to Return)\nInput: ");
+                                        String input = br.readLine();
+                                         if (input == null || input.trim().isEmpty()) {
+                                             for (int i = 0; i < studentNumber.length; i++){
+                                                 if (studentNumber[i].equals(loggedIn)) {
+                                                     String[] professor = toEvaluate[i].split(",");
+
+                                                     professor[selectionInt] = professor[selectionInt].trim() + " [Completed]";
+                                                     toEvaluate[i] = String.join(",", professor);
+
+                                                     finishedEvaluating = true;
+                                                     break;
+                                                 }
+                                             }
+                                         } else {
+                                             System.out.println("Invalid Input! Try Again");
+                                         }
+                                    }
+                                }
+                                break;
+                            }
+                    } catch (IOException e) {
+                            System.out.println("Error");
                         }
                     }
-                  break;
+                  continue;
+                  
+                default:
+                    System.out.println("Invalid Input!");
             }
         }
     }
