@@ -1,5 +1,7 @@
 import java.io.*;
 
+//Goodluck sa finals ninyo especially kang JE Abaya *^v^* hahaha
+
 public class StudentInformationSystem {
     public static void main(String[] args) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -105,8 +107,7 @@ public class StudentInformationSystem {
             }         
         }
     }
-    
-    //Goodluck sa finals ninyo especially kang JE Abaya *^v^* hahaha
+   
     
     //Main Interface
     public static void mainInterface(BufferedReader br, String[] accounts, String[] studentNumber, String[] studentName, String[] studentGrades, String[] studentBalance, String[] subjects, String[] timeSchedule, String[] daySchedule, int existingAccounts, String loggedIn, String[] toEvaluate) {
